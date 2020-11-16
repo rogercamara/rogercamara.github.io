@@ -5,7 +5,7 @@ $( document ).ready(function() {
     
     var orbitaURL   = "data.json";
     var db          =  openDatabase('dados', '1.0', 'orbita analytics', 2 * 1024 * 1024);
-    var dataPeriodo = "18/08/2020 - 15/08/2020"
+    var dataPeriodo = "17/09/2020 - 15/11/2020"
 
     // Gerador de resultados
 
