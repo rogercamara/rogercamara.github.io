@@ -119,14 +119,14 @@ $( document ).ready(function() {
 
     // Botão voltar
     
-    function listaDados(){
+    function logDados(){
         db.transaction(function (transaction) {   
             transaction.executeSql("SELECT coop FROM data GROUP BY coop" , [], function (tx, results) {
                 var len = results.rows.length; 
                 var i=0;
 
                 for (; i < len; i = i + 1) {
-                    console.log(results.rows.item(i).coop)
+                    console.log("Cooperativa:" + results.rows.item(i).coop)
                 }
             }, null);
         });
