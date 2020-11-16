@@ -118,6 +118,21 @@ $( document ).ready(function() {
       });
 
     // Botão voltar
+    
+    function listaDados(){
+    db.transaction(function (transaction) {   
+        transaction.executeSql("SELECT coop FROM data GROUP BY coop" , [], function (tx, results) {
+            var len = results.rows.length; 
+            var i=0;
+
+            // Insere no iput
+
+            for (; i < len; i = i + 1) {
+                console.log(results.rows.item(i).coop)
+            }
+         }, null);
+     });
+    }
 
       $('#voltar').click(function(e) {
         document.location.reload(true);
