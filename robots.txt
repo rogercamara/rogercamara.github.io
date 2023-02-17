@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://rogercamara.github.io/sitemap.xml
