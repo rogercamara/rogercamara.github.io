@@ -1,4 +1,4 @@
 ---
-layout: forward
-target: https://example.com
+layout: default.html
+target: https://rogerverso.site
 ---
