@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torre de Limites - Cartão de Crédito</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .chart-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        canvas {
+            width: 100% !important;
+            height: 400px !important;
+        }
+        .form-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .history-container {
+            margin-top: 30px;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Torre de Limites - Cartão de Crédito</h1>
+
+    <!-- Formulário para adicionar compras -->
+    <div class="form-container">
+        <label for="purchase-type">Tipo de Compra:</label>
+        <select id="purchase-type">
+            <option value="on-us">On Us (Na loja)</option>
+            <option value="off-us">Off Us (Fora da loja)</option>
+        </select>
+        <label for="purchase-value">Valor da Compra:</label>
+        <input type="number" id="purchase-value" placeholder="Digite o valor da compra" />
+        <button onclick="addPurchase()">Adicionar Compra</button>
+    </div>
+
+    <div class="chart-container">
+        <h2>Limite de Crédito: Total Disponível</h2>
+        <canvas id="creditLimitChart"></canvas>
+    </div>
+
+    <!-- Histórico de alterações -->
+    <div class="history-container">
+        <h3>Histórico de Alterações</h3>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>Tipo de Compra</th>
+                    <th>Valor da Compra</th>
+                    <th>Limite Restante</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Histórico de compras será adicionado aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let totalLimit = 1000; // Limite total inicial de 1000 reais
+        let remainingLimit = totalLimit; // Limite restante inicial é o total
+
+        const ctx = document.getElementById('creditLimitChart').getContext('2d');
+        const creditLimitChart = new Chart(ctx, {
+            type: 'bar', // Usando gráfico de barras
+            data: {
+                labels: ['Limite Total', 'Restante'],
+                datasets: [{
+                    label: 'Limite de Crédito',
+                    data: [totalLimit, remainingLimit], // Inicialmente, o limite total é 1000 e o restante é o mesmo
+                    backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)'], // Azul para o total e vermelho para o restante
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Função para adicionar uma compra e atualizar limites
+        function addPurchase() {
+            const purchaseType = document.getElementById('purchase-type').value;
+            const purchaseValue = parseFloat(document.getElementById('purchase-value').value);
+
+            if (!purchaseValue || purchaseValue <= 0) {
+                alert('Por favor, insira um valor válido para a compra.');
+                return;
+            }
+
+            // Verifica se o valor da compra ultrapassa o limite restante
+            if (remainingLimit - purchaseValue < 0) {
+                alert('Limite total excedido! Não é possível realizar a compra.');
+                return;
+            }
+
+            if (purchaseType === 'on-us') {
+                // Subtrai diretamente do limite restante
+                remainingLimit -= purchaseValue;
+                totalLimit -= purchaseValue;
+            } else if (purchaseType === 'off-us') {
+                // Subtrai do limite restante e mais duas vezes o valor da compra Off Us do limite total
+                remainingLimit -= purchaseValue;
+                totalLimit -= (purchaseValue * 3); // Limite total = limite total - 3x valor da compra Off Us
+            }
+
+            // Atualiza o gráfico com os novos valores
+            creditLimitChart.data.datasets[0].data = [totalLimit, remainingLimit]; // Atualiza o gráfico com o novo limite restante
+            creditLimitChart.update();
+
+            // Adiciona a alteração no histórico
+            addToHistory(purchaseType, purchaseValue);
+        }
+
+        // Função para adicionar o registro ao histórico
+        function addToHistory(type, value) {
+            const tableBody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+
+            const row = tableBody.insertRow();
+            const cellType = row.insertCell(0);
+            const cellValue = row.insertCell(1);
+            const cellRemaining = row.insertCell(2);
+
+            cellType.textContent = type === 'on-us' ? 'On Us (Na loja)' : 'Off Us (Fora da loja)';
+            cellValue.textContent = `R$ ${value.toFixed(2)}`;
+            cellRemaining.textContent = `R$ ${remainingLimit.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
