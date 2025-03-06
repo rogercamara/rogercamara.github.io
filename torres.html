@@ -152,15 +152,15 @@
                 remainingLimit -= purchaseValue;
                 totalLimit -= purchaseValue;
             } else if (purchaseType === 'off-us') {
-                remainingLimit -= (purchaseValue * 2);
-                totalLimit -= (purchaseValue * 3);
+                remainingLimit -= (purchaseValue);
+                totalLimit -= (purchaseValue * 2);
             }
 
             // Atualiza os dados do gráfico
             creditLimitChart.data.datasets[0].data = [totalLimit, remainingLimit];
 
             // Atualiza a escala do eixo Y
-            creditLimitChart.options.scales.y.suggestedMax = Math.max(totalLimit, remainingLimit) + 100;
+            // creditLimitChart.options.scales.y.suggestedMax = Math.max(totalLimit, remainingLimit) + 100;
 
             creditLimitChart.update();
             addToHistory(purchaseType, purchaseValue);
