@@ -14,7 +14,7 @@
             background-color: #f8f9fa;
         }
 
-        h1 {
+        h2 {
             text-align: center;
             margin-top: 20px;
             font-weight: bold;
@@ -152,8 +152,8 @@
                 remainingLimit -= purchaseValue;
                 totalLimit -= purchaseValue;
             } else if (purchaseType === 'off-us') {
-                remainingLimit -= (purchaseValue * 3);
-                totalLimit -= (purchaseValue * 2);
+                remainingLimit -= (purchaseValue * 2);
+                totalLimit -= (purchaseValue * 3);
             }
 
             // Atualiza os dados do gráfico
