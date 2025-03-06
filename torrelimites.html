@@ -21,7 +21,7 @@
         }
         canvas {
             width: 100% !important;
-            height: 400px !important;
+            height: 500px !important;
         }
         .form-container {
             text-align: center;
@@ -95,7 +95,7 @@
         const creditLimitChart = new Chart(ctx, {
             type: 'bar', // Usando gráfico de barras
             data: {
-                labels: ['Limite Total', 'Restante'],
+                labels: ['Limite Off-US', 'Limite On Us'],
                 datasets: [{
                     label: 'Limite de Crédito',
                     data: [totalLimit, remainingLimit], // Inicialmente, o limite total é 1000 e o restante é o mesmo
