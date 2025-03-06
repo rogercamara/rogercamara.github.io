@@ -119,15 +119,16 @@
                     borderWidth: 1
                 }]
             },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        suggestedMax: totalLimit + 100
-                    }
-                }
+              scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 100 // Define um espaçamento adequado entre os valores do eixo Y
+                },
+                suggestedMax: totalLimit // Faz com que o eixo Y se ajuste conforme os valores mudam
             }
+        }
+    }
         });
 
         function addPurchase() {
