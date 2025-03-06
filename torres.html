@@ -104,6 +104,7 @@
 
     <script>
         let totalLimit = 1000;
+        let limite = 1000;
         let remainingLimit = totalLimit;
 
         const ctx = document.getElementById('creditLimitChart').getContext('2d');
@@ -127,7 +128,7 @@
                         ticks: {
                             stepSize: 100 // Define um espaçamento adequado entre os valores do eixo Y
                         },
-                        suggestedMax: totalLimit
+                        suggestedMax: limite
                     }
                 }
             }
