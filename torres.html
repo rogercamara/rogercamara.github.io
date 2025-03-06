@@ -91,6 +91,7 @@
                     <th>Tipo de Compra</th>
                     <th>Valor da Compra</th>
                     <th>Limite Restante On Us</th>
+                    <th>Limite Off Us</th>
                 </tr>
             </thead>
             <tbody id="history-table">
@@ -174,6 +175,7 @@
                 <td>${type === 'on-us' ? 'ON US' : 'OFF US'}</td>
                 <td>R$ ${value.toFixed(2)}</td>
                 <td>R$ ${remainingLimit.toFixed(2)}</td>
+                <td>R$ ${totalLimit.toFixed(2)}</td>
             `;
             tableBody.appendChild(row);
         }
