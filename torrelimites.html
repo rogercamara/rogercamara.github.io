@@ -64,7 +64,7 @@
         <input type="number" id="purchase-value" placeholder="Digite o valor da compra" />
         <button onclick="addPurchase()">Adicionar Compra</button>
     </div>
-
+<hr>
     <div class="chart-container">
         <h2>Limite de Crédito: Total Disponível</h2>
         <canvas id="creditLimitChart"></canvas>
@@ -97,7 +97,7 @@
             data: {
                 labels: ['Limite Off-US', 'Limite On Us'],
                 datasets: [{
-                    label: 'Limite de Crédito',
+                    label: 'Limite de crédito total OFF-US',
                     data: [totalLimit, remainingLimit], // Inicialmente, o limite total é 1000 e o restante é o mesmo
                     backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)'], // Azul para o total e vermelho para o restante
                     borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
@@ -136,7 +136,7 @@
                 totalLimit -= purchaseValue;
             } else if (purchaseType === 'off-us') {
                 // Subtrai do limite restante e mais duas vezes o valor da compra Off Us do limite total
-                remainingLimit -= purchaseValue;
+                remainingLimit -= (purchaseValue * 2);
                 totalLimit -= (purchaseValue * 2); // Limite total = limite total - 3x valor da compra Off Us
             }
 
