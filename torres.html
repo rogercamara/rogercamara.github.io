@@ -110,7 +110,7 @@
         const creditLimitChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Limite Total', 'Limite Restante'],
+                labels: ['Limite Off-US', 'Limite On Us'],
                 datasets: [{
                     label: 'Torre de Limites',
                     data: [totalLimit, remainingLimit],
@@ -119,16 +119,18 @@
                     borderWidth: 1
                 }]
             },
-              scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    stepSize: 100 // Define um espaçamento adequado entre os valores do eixo Y
-                },
-                suggestedMax: totalLimit // Faz com que o eixo Y se ajuste conforme os valores mudam
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 100 // Define um espaçamento adequado entre os valores do eixo Y
+                        },
+                        suggestedMax: totalLimit
+                    }
+                }
             }
-        }
-    }
         });
 
         function addPurchase() {
