@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torre de Limites - Cartão de Crédito</title>
+    <title>Torre de Limites - Simulador</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,21 +56,21 @@
 </head>
 <body>
 
-    <h1>Torre de Limites - Cartão de Crédito</h1>
+    <h2>Torre de Limites - Simulador</h2>
 
     <!-- Formulário para adicionar compras -->
     <div class="form-container">
         <div class="mb-3">
             <label for="purchase-type" class="form-label">Tipo de Compra:</label>
             <select id="purchase-type" class="form-select">
-                <option value="on-us">On Us (Na loja)</option>
-                <option value="off-us">Off Us (Fora da loja)</option>
+                <option value="on-us">ON US</option>
+                <option value="off-us">OFF US</option>
             </select>
         </div>
         
         <div class="mb-3">
             <label for="purchase-value" class="form-label">Valor da Compra:</label>
-            <input type="number" id="purchase-value" class="form-control" placeholder="Digite o valor da compra" />
+            <input type="number" id="purchase-value" class="form-control" placeholder="R$" />
         </div>
         
         <button class="btn btn-primary w-100" onclick="addPurchase()">Adicionar Compra</button>
